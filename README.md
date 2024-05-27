@@ -5,3 +5,8 @@
 ### Password hashed using base64_encode.  
 ### Password rehased using  base_64 decode.  
 ### In the login page, email and password verification is done by fetching data from the database.
+### Implemented registration using ajax call
+### Implemented dashboard page with search user to retrieve user details from database
+### To send response using json_encode with JSON_FORCE_OBJECT flag
+### Response in string converted to Javascript object using JSON.parse()
+

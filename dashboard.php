@@ -52,7 +52,11 @@
     ?>
     <div class="container">
         <h1>Welcome</h1>
-        <a href="logout.php"> Log Out</a>
+        <a href="logout.php"> Log Out</a><br><br>
+        <form name="form" action="" method="get">
+            <input type="search" id="serachUser" name="searchUser"><br><br>
+            <input type="submit" value="Search User" name="Search User"><br><br>
+        </form>
     </div>
     <?php
         $servername = "localhost";
@@ -61,16 +65,19 @@
         $database="UserDetails";
         
         $connection = mysqli_connect($servername, $mysqlUsername, $mysqlPassword,$database);
-        
+        $showUser=$_GET['searchUser'];
         if (!$connection) {
             die("Unable to load User Details - Connection failed: " . mysqli_connect_error());
-        }
-        
+        }  
+        //echo "<br>".$showUser; 
+        //$showUser=filter_var($showUser, FILTER_SANITIZE_STRING);     
         // $sql="SELECT user.id, user.username, user.emailAddress, user.password, product.id, product.product_name, product.product_description FROM user RIGHT JOIN product ON user.id = product.user_id";
-        $sql="SELECT product.id, product.user_id, user.username, user.emailAddress, user.password, product.product_name, product.product_description  FROM user RIGHT JOIN product ON user.id = product.user_id ORDER BY product.user_id";
-    
+        echo "User : $showUser<br><br>";
+        $sql="SELECT product.id, product.user_id, user.username, user.emailAddress, user.password, product.product_name, product.product_description  FROM user RIGHT JOIN product ON user.id = product.user_id WHERE user.username='$showUser'";//ORDER BY product.user_id";
         $result = mysqli_query($connection,$sql);
-        if ($result->num_rows > 0) {
+        $sql1="SELECT id,username,emailAddress,password  FROM user WHERE username='$showUser'";
+        $result1 = mysqli_query($connection,$sql1);
+        if($result->num_rows > 0) {
             echo "<table><tr><th>"."user id"."</th><th>"."Product id"."</th><th>"."Username"."</th><th> "."email Address"."</th><th>"."Password"."</th><th>"."Product name"."</th><th>"."Product description"."</th></tr>";
 
             while($row = $result->fetch_assoc()) {
@@ -79,7 +86,21 @@
 
             echo "</table>";
         } 
-      
+        else if($result1->num_rows > 0){
+            echo "<table><tr><th>"."User id"."</th><th>"."Username"."</th><th> "."Email Address"."</th><th>"."Password"."</th><th>"."Product id"."</th><th>"."Product name"."</th><th>"."Product description"."</th></tr>";
+
+            while($row = $result1->fetch_assoc()) {
+                echo "<table><tr><td>".$row["id"]."</td><td>".$row["username"]. "</td><td>". $row["emailAddress"]. "</td><td>" . $row["password"]."</td><td>"."-"."</td><td>"."-"."</td><td>"."-"."</td></tr>";
+            }
+
+            echo "</table>";
+            echo "<br>User has not purchased any product";
+        }
+        else {
+            echo "User Not Found" . mysqli_error($connection);
+        }
+         mysqli_close($connection);
+ 
        // echo "<table><tr><th>"."id"."</th><th>"."username"."</th><th> "."emailAddress"."</th><th>"."password"."</th><th>"."product_id"."</th><th>"."product_name"."</th><th>"."product_description"."</th></tr><br>";
 
         // if ($result->num_rows > 0) {
@@ -101,11 +122,7 @@
         // }
         // print $html.'</table>';
         // }
-        else {
-           echo "Error " . mysqli_error($connection);
-        }
-        mysqli_close($connection);
-
+        
     ?>
      
 </body>

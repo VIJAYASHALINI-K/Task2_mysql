@@ -59,4 +59,6 @@ else{
     header("Location:http://localhost/login.php?Message=".urlencode("Incorrect login details"));
     exit();
 }
+
+mysqli_close($connection);
 error_log("debug.log");     

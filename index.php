@@ -31,7 +31,7 @@
         fieldset{
             margin:20px;
             padding:2px;
-            background-color: rgb(34,34,34);
+            background-color:rgb(34,34,34);
         }
         legend{
             font-size:28px;
@@ -50,6 +50,10 @@
         }
         span{
             background-color:rgb(34,34,34);
+            font-size:16px;
+        }
+        h3{
+            background-color:rgb(34,34,34);
             font-size:18px;
         }
         #register{
@@ -67,168 +71,85 @@
         } 
         input :focus{
             background-color:white;
-        }      
+        }   
     </style>
-    <script>       
-        $(document).ready(function() {
-            $("#username").on( "blur", function() {
-                var usernamePattern = /^[a-zA-Z]+$/;
-                var username = $('#username').val();
-                if (username.match(usernamePattern) && (username.length >= 3 && username.length <= 8)){
-                    $('#usernameValidation').text('validated').css('color','green');
-                }
-                else if(username.length < 3 || username.length > 8){   
-                    $('#usernameValidation').text('Enter username with minimum length of 3 and maximum length of 8').css('color','red');
-                }
-                else if(!(username.match(usernamePattern))){                
-                    $('#usernameValidation').text('Please enter letters only!').css('color','red');
-                }
-                else{
-
-                    $('#usernameValidation').text('Please enter letters only!').css('color','red');
-                }
-            });
-        }); 
-        $(document).ready(function() {
-            $('#emailAddress').on("blur",function(){                
-                var emailAddress = $('#emailAddress').val();
-                var emailAddressPattern =  /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
-                if(emailAddress.match(emailAddressPattern) && emailAddress.length != 0) {
-                    $('#emailAddressValidation').text('validated').css('color','green');
-                }
-                else{               
-                    $('#emailAddressValidation').text('Please enter valid email address').css('color','red');      
-                }
-            });
-        });
-        
+    <script>        
         $(document).ready(function(){
-            $("#password").on('blur',function(){
-                var password = $('#password').val();                
-                var passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*_])(?=.{6,12}$)/;
-                if(password.match(passwordPattern) && (password.length>=8)){               
-                    $('#passwordValidation').text('validated').css('color','green'); 
-                    
-                }
-                else{
-                    $('#passwordValidation').text('Please enter valid password').css('color','red');
-                }
+            $("#register").click(function(){
+                $.ajax({
+                    url: "register.php",
+                    type: "post",  
+                    data: $("form").serialize(),
+                    /*
+                    *JSON.parse(string, function)
+                    *@param string
+                    *@return Object
+                    */               
+                    success: function (results) { 
+                        result=JSON.parse(results);
+                        if(result.data.usernameCheck=="validated"){
+                            $("#usernameCheck").html("&check;"+result.data.usernameCheck).css("color","green"); 
+                        }
+                        else{
+                            $("#usernameCheck").html(result.data.usernameCheck).css("color","red"); 
+                        }
+                        if(result.data.emailAddressCheck=="validated"){
+                            $("#emailAddressCheck").html("&check;"+result.data.emailAddressCheck).css("color","green"); 
+                        }
+                        else{
+                            $("#emailAddressCheck").html(result.data.emailAddressCheck).css("color","red");                            
+                        }
+                        if(result.data.passwordCheck=="validated"){
+                            $("#passwordCheck").html("&check;"+result.data.passwordCheck).css("color","green"); 
+                        }
+                        else{
+                            $("#passwordCheck").html(result.data.passwordCheck).css("color","red");                              
+                        }
+                        if(result.data.repeatPasswordCheck=="validated"){
+                            $("#repeatPasswordCheck").html("&check;"+result.data.repeatPasswordCheck).css("color","green"); 
+                        }
+                        else{
+                            $("#repeatPasswordCheck").html(result.data.repeatPasswordCheck).css("color","red");                           
+                        } 
+                        if(result.data.successfullMessage!="Enter valid inputs"){
+                            $("#registrationResult").html(result.data.successfullMessage).css("color","green"); 
+                        }
+                        else{
+                            $("#registrationResult").html(result.data.successfullMessage).css("color","red"); ; 
+                        }
+                    },
+                    error: function (error){ 
+                        console.log('error'+error); 
+                    }
+                });
             });
         });
-        
-         $(document).ready(function(){
-             $('#repeatPassword').on('keyup',function(){
-                 if($('#password').val() == $('#repeatPassword').val()){
-                     $('#repeatPasswordHint').text('validated').css('color','green');
-                 }
-                else{
-                    $('#repeatPasswordHint').text('Match the password typed above').css('color','red');
-                   
-                }
-             });
-         });
     </script>
 </head>
 <body>
     <div class="container" >
-        <form method="POST" action="">
+        <form form="registrationDetails">
             <fieldset>
                 <legend >Registration</legend>
                 <label for="username">Username</label><br>
-                <input type="text" id="username" name="username"><br><span id="usernameValidation"></span><br><br>
+                <input type="text" id="username" name="username" ><br>  
+                <h3 id="usernameCheck"></h3><br>
                 <label for="emailAddress">Email Address</label><br>
-                <input type="email" id="emailAddress" name="emailAddress" required><br><span id="emailAddressValidation"></span><br><br>
-                <label for="password">Password</label><br>
-                <input type="password" id="password" name="password" required><br><span id="passwordValidation"></span><br>
+                <input type="email" id="emailAddress" name="emailAddress" ><br>
+                <h3 id="emailAddressCheck"></h3><br>                    
+                <label for="password">Password</label><br>    
+                <input type="password" id="password" name="password" ><br> 
+                <h3 id="passwordCheck"></h3><br>               
                 <span>(password must contain lowercase,uppercase,number and special character)</span><br><br>
                 <label for="repeatPassword">Repeat password</label><br>
-                <input type="password" id="repeatPassword" name="repeatPassword" required><br>
-                <span id="repeatPasswordHint"></span><br><br>
-                <input type="submit" value="Register" id="register"><br><br>
-                <label>Have an account?</label><a href="/login.php">Login</a>
+                <input type="password" id="repeatPassword" name="repeatPassword"><br>  
+                <h3 id="repeatPasswordCheck"></h3><br>                     
+                <input type="button" value="Register" id="register"><br><br>
+                <label>Have an account?</label><a href="/login.php">Login</a><br><br>
             </fieldset>
         </form>
+        <h2 id="registrationResult" style="font-size:20px;"></h2>
     </div>
-    
-    <?php    
-    if($_SERVER["REQUEST_METHOD"]=="POST"){
-        $username=$_POST['username'];
-        $emailAddress=$_POST['emailAddress'];
-        $password=$_POST['password'];
-        /*
-        password_hash($password,$algo)
-        *@param string $password  - contains number(s),upperCaseLetter(s),lowerCaseLetter(s) and specialCharacter(s)
-        *@param string $algo - as PASSWORD_DEFAULT used
-        *@param array $options
-        *@return string; - as 60 characters
-        */
-        //$passwordEncrypted=password_hash($password, PASSWORD_DEFAULT);
-        $passwordEncrypted=base64_encode($password);
-                
-        $servername = "localhost";
-        $mysqlUsername = "example";
-        $mysqlPassword = "";
-        $database="UserDetails";
-
-        $connection = mysqli_connect($servername, $mysqlUsername, $mysqlPassword,$database);
-
-        if (!$connection) {
-            echo '<span style="padding:5px;font-size: 20px;color:white;">'.die("Unable to load User Details - Connection failed: " . mysqli_connect_error())."<br>";
-        }
-        else {
-            echo '<span style="padding:5px;font-size: 20px;color:white;">'."DB connected<br>".'</span>'; 
-        }
-        $sql="SELECT emailAddress FROM user";
-
-        $user = mysqli_query($connection,$sql);
-        $emailAddressExists=false;
-        if(mysqli_num_rows($user) > 0){            
-            while($row= mysqli_fetch_assoc($user)){
-                if($row['emailAddress']==$emailAddress){
-                    // echo $row['emailAddress'];
-                    $emailAddressExists=true;
-                    break;
-                }
-            }
-        }else{
-            $emailAddressExists=false;
-        }
-        
-        if($emailAddressExists){           
-            echo '<span style="padding:5px;font-size: 20px;color:white;">'."You are already registerd. Try to login<br>".'</span>';
-        }
-        else{
-        //      using prepared statement
-        //     if($connection) {
-        //     $registerUser=$connection->prepare("INSERT INTO user (username,emailAddress,password) VALUES (?,?,?)");
-        //     $registerUser->bind_param("sss",$username,$emailAddress,$passwordEncrypted);
-
-        //     $username=$username;
-        //     $emailAddress=$emailAddress;
-        //     $passwordEncrypted=$passwordEncrypted;
-        //     $registerUser->execute();
-
-        //     using quotes 
-            $username=filter_var($username, FILTER_SANITIZE_STRING); 
-            $emailAddress=filter_var($emailAddress, FILTER_SANITIZE_EMAIL);
-            //$password=filter_var($password)
-            $registerUser="INSERT INTO user (username,emailAddress,password) VALUES ('$username','$emailAddress','$passwordEncrypted')";
-          
-            if(mysqli_query($connection,$registerUser)){
-                echo '<span style="padding:5px;font-size: 20px;color:white;">'."You are registered Successfully.".'</span>';
-            }
-            else{
-                    echo '<span style="padding:5px;font-size: 20px;color:white;">'."Error: " . $registerUser . "<br>" . mysqli_error($connection).'</span>'; 
-                }// header("Location:http://localhost/login.php?Message=".urlencode("You are registered Successfully as First User."));
-                return json_encode(['success'=>true,'message'=>'user created successfully']);  
-            }
-        mysqli_close($connection);
-    }
-    ?>
-    <?php    
-        // $Message = $_GET['Message'];
-        // echo $Message; 
-        error_log("debug.log");    
-    ?>
 </body>
 </html>
+
