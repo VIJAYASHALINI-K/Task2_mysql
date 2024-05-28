@@ -107,7 +107,7 @@
         if(mysqli_num_rows($user) > 0){            
             while($row= mysqli_fetch_assoc($user)){
                 if($row['emailAddress']==$emailAddress){
-                    echo $row['emailAddress'];
+                    // echo $row['emailAddress'];
                     $emailAddressExists=true;
                     break;
                 }
@@ -116,7 +116,7 @@
         else{
             $emailAddressExists=false;
         }
-        echo $emailAddressExists;
+        // echo $emailAddressExists;
         $successfullMessage="";
         if($emailAddressExists){                           
             $successfullMessage="You are already registerd. Try to login.";

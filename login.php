@@ -3,6 +3,29 @@
    if(isset($_SESSION['id'])){
         header("Location:http://localhost/dashboard.php");
     }
+    // if(isset($_COOKIE['emailAddress'])){
+    //     $emailAddresses=json_decode($_COOKIE['emailAddress'],true)
+    //     if(isset($emailAddresses['$emailAddress'])){
+    //         echo "cookie set";
+    //         $passwordByCookies=$_COOKIE[$password];
+    //     }
+    //     else{
+    //         echo "cookie not set";
+    //         $emailAddress=$_POST['emailAddress'];
+    //         $password=$_POST['password'];
+    //         $expiration = time() + 86400;
+    //         setcookie($emailAddress,$password,$expiration);
+    //     }
+    // }
+    // else{
+    //     echo "cookie not set";
+    //     $emailAddress=$_POST['emailAddress'];
+    //     $password=$_POST['password'];
+    //     $expiration = time() + 86400;
+    //     setcookie($emailAddress,$password,$expiration);
+    // }
+    
+    
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -13,7 +36,7 @@
     <style>
         *{
             text-align:center;
-            background-color:rgb(7, 15, 43);
+            background-color:rgb(208, 217, 210);
         }
         .container{
             margin:0 auto;
@@ -28,6 +51,7 @@
         }
         legend{
             font-size:28px;
+            color:black;
         }
 
         label{
@@ -65,7 +89,7 @@
                 <label for="emailAddress">Email Address</label><br>
                 <input type="email" id="emailAddress" name="emailAddress" required><br><br>
                 <label for="password">Password</label><br>
-                <input type="password" for="password" name="password" required><br><br>
+                <input type="password" for="password" name="password"  value="<?php echo $passwordByCookies; ?>" required><br><br>
                 <input type="submit" value="Log In"  id="logIn"><br><br>
                 <label>Don't have an account? </label><a href="/index.php">Register Now</a><br><br>
             </fieldset>

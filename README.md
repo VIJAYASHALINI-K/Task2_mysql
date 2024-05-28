@@ -9,4 +9,5 @@
 ### Implemented dashboard page with search user to retrieve user details from database
 ### To send response using json_encode with JSON_FORCE_OBJECT flag
 ### Response in string converted to Javascript object using JSON.parse()
-
+### Dashboard page updated using ajax call
+### Implemented dashboard page using the subquery for retrieving user details in models page

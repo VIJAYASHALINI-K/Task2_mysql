@@ -20,7 +20,7 @@
     <style>
         *{
             text-align:center;
-            background-color:rgb(34,9,44);
+            background-color:rgb(208, 217, 210);
         }
         .container{
             margin:0 auto;
@@ -32,6 +32,7 @@
             margin:20px;
             padding:2px;
             background-color:rgb(34,34,34);
+            color:black;
         }
         legend{
             font-size:28px;
