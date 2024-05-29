@@ -1,0 +1,85 @@
+@media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+    *{
+        font-size:12px !important;
+        font-family: 'Times New Roman', Times, serif;
+    }
+    legend{
+        text-align:left !important;
+    }
+}
+
+@supports (-ms-ime-align: auto) {
+    legend{
+        text-align:left !important;
+    }
+}
+
+@-moz-document url-prefix() {
+    legend{
+        text-align:left !important;
+    }
+}
+
+@media not all and (min-resolution: 0.001dpcm) {
+    legend{
+        text-align:left !important;
+    }
+}
+
+@media screen and (-webkit-min-device-pixel-ratio: 0) and (min-resolution: 0.001dpcm) {
+    legend{
+        text-align:left !important;
+    }
+}
+fieldset{
+    margin:20px;
+    padding:2px;
+    background-color:rgb(251,234,235);
+    border-radius:10px;
+}
+legend{
+    font-size:28px;
+    color:white;
+    margin:10px;
+    padding:5px;
+
+}
+label{
+    margin-top:10px;
+    padding:2px;
+    font-size:24px;
+    background-color:rgb(251,234,235);
+}
+input{
+    margin-top:10px;
+    padding:5px;
+    font-size:16px;
+    background-color:azure;
+}
+span{
+    background-color:rgb(251,234,235);
+    font-size:16px;
+}
+h3{
+    background-color:rgb(251,234,235);
+    font-size:18px;
+}
+#register,#logIn{
+    padding:5px;
+    font-size:24px;
+    background-color:teal;
+    border-radius:5px;
+}
+a{
+    font-size:28px;
+    text-decoration:none;
+    background-color:rgb(251,234,235);
+    font-weight:bold;
+    color:rgb(190, 49, 68)
+} 
+input :focus{
+    background-color:white;
+} 
+#user{
+    background-color:rgb(251,234,235);
+}  

@@ -17,32 +17,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <style>
-        *{
-            background-color:rgb(208, 217, 210);
-            text-align:center;
-            margin:20 auto;
-        }
-        .container{
-            margin:10px;
-        }
-        #logout{
-            font-size:20px;
-            background-color:azure;
-            border-radius:5px;
-        }
-        table, th, td {
-            margin-left: auto;
-            margin-right: auto;
-            border: 1px solid black;
-            border-collapse: collapse;
-        }
-        td,th{
-            width: 150px;
-            height: 10px;
-        }
-        
-    </style>
+    <link rel="stylesheet" href="tabulation.css">
     <script>
         setTimeout(function() {
             $("h4").fadeOut();

@@ -16,64 +16,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registration</title>
+    <link rel="stylesheet" href="layout.css">
+    <link rel="stylesheet" href="design.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <style>
-        *{
-            text-align:center;
-            background-color:rgb(208, 217, 210);
-        }
-        .container{
-            margin:0 auto;
-            max-width:800px;
-            max-height:auto;
-            color:white;
-        }
-        fieldset{
-            margin:20px;
-            padding:2px;
-            background-color:rgb(34,34,34);
-            color:black;
-        }
-        legend{
-            font-size:28px;
-        }
-        label{
-            margin-top:10px;
-            padding:2px;
-            font-size:24px;
-            background-color:rgb(34,34,34);
-        }
-        input{
-            margin-top:10px;
-            padding:5px;
-            font-size:16px;
-            background-color:azure;
-        }
-        span{
-            background-color:rgb(34,34,34);
-            font-size:16px;
-        }
-        h3{
-            background-color:rgb(34,34,34);
-            font-size:18px;
-        }
-        #register{
-            padding:5px;
-            font-size:24px;
-            background-color:teal;
-            border-radius:5px;
-        }
-        a{
-            font-size:28px;
-            text-decoration:none;
-            background-color:rgb(34,34,34);
-            font-weight:bold;
-            color:rgb(190, 49, 68)
-        } 
-        input :focus{
-            background-color:white;
-        }   
-    </style>
+    
     <script>        
         $(document).ready(function(){
             $("#register").click(function(){
@@ -128,29 +74,41 @@
     </script>
 </head>
 <body>
-    <div class="container" >
-        <form form="registrationDetails">
-            <fieldset>
-                <legend >Registration</legend>
-                <label for="username">Username</label><br>
-                <input type="text" id="username" name="username" ><br>  
-                <h3 id="usernameCheck"></h3><br>
-                <label for="emailAddress">Email Address</label><br>
-                <input type="email" id="emailAddress" name="emailAddress" ><br>
-                <h3 id="emailAddressCheck"></h3><br>                    
-                <label for="password">Password</label><br>    
-                <input type="password" id="password" name="password" ><br> 
-                <h3 id="passwordCheck"></h3><br>               
-                <span>(password must contain lowercase,uppercase,number and special character)</span><br><br>
-                <label for="repeatPassword">Repeat password</label><br>
-                <input type="password" id="repeatPassword" name="repeatPassword"><br>  
-                <h3 id="repeatPasswordCheck"></h3><br>                     
-                <input type="button" value="Register" id="register"><br><br>
-                <label>Have an account?</label><a href="/login.php">Login</a><br><br>
-            </fieldset>
-        </form>
-        <h2 id="registrationResult" style="font-size:20px;"></h2>
-    </div>
+    <header>
+    </header>
+    <section>
+        <div class="container" id="registrationContainer">
+            <form id="registrationDetails">
+                <fieldset>
+                    <legend>Registration</legend>
+                    <label for="username">Username</label><br>
+                    <input type="text" id="username" name="username" ><br>  
+                    <h3 id="usernameCheck"></h3><br>
+                    <label for="emailAddress">Email Address</label><br>
+                    <input type="email" id="emailAddress" name="emailAddress" ><br>
+                    <h3 id="emailAddressCheck"></h3><br>                    
+                    <label for="password">Password</label><br>    
+                    <input type="password" id="password" name="password" ><br> 
+                    <h3 id="passwordCheck"></h3><br>               
+                    <span>(password must contain lowercase,uppercase,number and special character)</span><br><br>
+                    <label for="repeatPassword">Repeat password</label><br>
+                    <input type="password" id="repeatPassword" name="repeatPassword"><br>  
+                    <h3 id="repeatPasswordCheck"></h3><br>                     
+                    <input type="button" value="Register" id="register"><br><br>
+                    <span id="user">
+                        <span id="existingUser">
+                            <label>Have an account?</label>
+                        </span>
+                        <span id="existingUserLink">
+                            <a href="/login.php">Login</a><br><br>
+                        </span>
+                    </span>
+                </fieldset>
+            </form>
+            <h2 id="registrationResult" style="font-size:20px;"></h2><br><br>
+        </div>
+    </section>
+    <footer>
+    </footer>
 </body>
 </html>
-
